@@ -70,6 +70,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Realestatebackend.wsgi.application'
 
+REST_FRAMEWORK = {
+    # other settings...
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
