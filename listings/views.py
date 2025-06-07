@@ -15,7 +15,7 @@ def property_list(request):
     houses = Property.objects.all()
     
     paginator = PageNumberPagination()
-    paginator.page_size = 1  # or whatever number you want per page
+    paginator.page_size = 12  # or whatever number you want per page
     
     result_page = paginator.paginate_queryset(houses, request)
     serializer = HouseSerializer(result_page, many=True)
