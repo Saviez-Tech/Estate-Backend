@@ -1,1 +1,4 @@
 db.sqlite3
+properties/
+payment_receipts/
+listings/migrations/
