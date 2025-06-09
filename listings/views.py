@@ -8,24 +8,25 @@ from rest_framework import status, permissions
 from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
 from .filters import PropertyFilter
+from .paginationn import CustomPageNumberPagination
 
 # List view: List all houses
 @api_view(['GET'])
 @permission_classes([])
 def property_list(request):
     houses = Property.objects.all()
-    
+
     # apply filters
     filterset = PropertyFilter(request.GET, queryset=houses)
     if not filterset.is_valid():
         return Response(filterset.errors, status=400)
     filtered_houses = filterset.qs
 
-    paginator = PageNumberPagination()
-    paginator.page_size = 12
+    paginator = CustomPageNumberPagination()
     result_page = paginator.paginate_queryset(filtered_houses, request)
     serializer = HouseSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
+
 
 # Detail view: Retrieve one house by ID
 @api_view(['GET'])
